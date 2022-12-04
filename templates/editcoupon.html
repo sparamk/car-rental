@@ -1,0 +1,65 @@
+{% extends 'master.html' %}
+{% block title %}Add Coupon{% endblock %}
+{% block pageTitle %}Add Coupon{% endblock %}
+{% block logout %}
+{% load static %}
+<a href="logout/"><img style="height:40px;width:40px" src="{% static 'assets/media/icons/logout.jpeg' %}"
+    alt="logout" /></a>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="card card-flush h-xl-100">
+    <div class="card-body">
+      <div class="col-12">
+        <h2 class="bold text-dark m-5">
+          {{ success }}
+          {{ error }}
+        </h2>
+        <form class="row g-3 needs-validation" novalidate id="registration_form" action="owner/updatecoupon/" method="POST"
+          data-parsley-validate="">{% csrf_token %}
+          <input type="hidden" value="{{ coupon_id }}" name="coupon_id">
+          <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="coupon_code" placeholder="Enter Coupon Code" name="coupon_code" value="{{ coupon_code }}"
+              required="">
+            <label for="coupon_code">Coupon Code</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="discount" placeholder="Enter discount" name="discount" value="{{ discount }}"
+              required="">
+            <label for="discount">Discount</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+
+
+          <input class="btn btn-primary" type="submit">
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+  $.datetimepicker.setLocale('en');
+  const d = new Date();
+  $('#date_valid_from').datetimepicker({ value: d, step: 10 });
+  $('#date_valid_to').datetimepicker({ value: d, step: 10 });
+</script>
+{% endblock %}
