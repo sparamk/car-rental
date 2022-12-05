@@ -79,6 +79,7 @@ class userTestCases(TestCase):
         self.assertEqual(response.status_code,200)
         
     def test_logout(self):
+        print(self._testMethodName)
         User.objects.create_user(username="black",email="black@gmail.com",password="white")
         user = User.objects.get(username = "black")
         user.save()
