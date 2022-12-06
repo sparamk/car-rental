@@ -64,12 +64,26 @@
           </div>
           <div class="form-floating mb-3 mt-3">
             <select class="form-select" aria-label="Select example" name="car_condition">
-              <option>Open this select menu</option>
               <option value="0">Good</option>
               <option value="1">Not Good</option>
             </select>
 
             <label for="car_condition">Car Condition</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <select class="form-select" aria-label="Select example" name="subscription">
+              <option value="1">Silver</option>
+              <option value="2">Gold</option>
+              <option value="3">Platinum</option>
+            </select>
+
+            <label for="subscription">Subscription</label>
             <div class="valid-feedback">
               Looks good!
             </div>

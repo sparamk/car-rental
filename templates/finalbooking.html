@@ -1,0 +1,33 @@
+{% extends 'master.html' %}
+{% block title %}Final Booking{% endblock %}
+{% block pageTitle %}Final Booking{% endblock %}
+{% block logout %}
+{% load static %}
+<a href="logout/"><img style="height:40px;width:40px" src="{% static 'assets/media/icons/logout.jpeg' %}"
+    alt="logout" /></a>
+{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">Title</h3>
+        <div class="card-toolbar">
+            <!-- <button type="button" onclick="history.back()" class="btn btn-sm btn-danger">
+                <i class="fa fa-chevron-left"></i>Go Back
+            </button> -->
+        </div>
+    </div>
+    <div class="card-body">
+        {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                        <strong>Message:</strong> {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+        <h2>The booking has been finalized. You can do the payment here at the office or from the link posted in your bookings page.</h2>
+    </div>
+    <div class="card-footer">
+        
+    </div>
+</div>
+{% endblock %}

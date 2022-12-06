@@ -15,7 +15,7 @@
       <div class="card-header pt-7">
         <!--begin::Title-->
         <h2 class="card-title align-items-start flex-column">
-          <span class="card-label fw-bold text-gray-800">Appointment :-</span>
+          <span class="card-label fw-bold text-gray-800">Digital Check In :-</span>
         </h2>
         <!--end::Title-->
       </div>
@@ -29,37 +29,27 @@
           </button>
         </div>
         {% endfor %}
-        <form class="container" action="/appointment/appointment/" method="post">
+        <form class="container" action="/customer/digitalcheckin/" method="post">
           {% csrf_token %}
           <br><br>
-          <div class="py-5 mb-5">
-            <div class="rounded border p-10">
-              <div class="mb-10">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" value="" id="testdrive" name="appointment" >
-                  <label class="form-check-label" for="testdrive">Schedule Test Drive</label>
-                </div>
-              </div>
-              <div class="mb-0">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" value="" id="appointment" name="appointment" checked="checked" >
-                  <label class="form-check-label" for="appointment">Schedule Appointment</label>
-                </div>
-              </div>
-            </div>
-          </div>
+          <select class="form-select " aria-label="Select example" name="booking_id">
+            <option>Please Select the Booking</option>
+            {% for book in booking %}
+            <option value="{{ book.id }}">{{ book.id }}</option>
+            {% endfor %}
+        </select>
+          <!-- <label>If there are multiple friends please seperate them by a comma (,)</label>  -->
           <div class="row">
-            
             <div class="col-6 my-5">
-              <input class="form-control col-6" type="date" name="appointment_date">
+              <input class="form-control col-6" type="date" name="check_in_date">
             </div>
             <div class="col-6 my-5">
-              <input class="form-control col-6" type="time" name="appointment_time">
+              <input class="form-control col-6" type="time" name="check_in_time">
             </div>
 
           </div>
 
-          <input class="btn btn-primary" type="submit" value="Book Appointment">
+          <input class="btn btn-primary" type="submit" value="Check In">
         </form>
       </div>
 

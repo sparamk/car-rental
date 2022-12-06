@@ -1,0 +1,72 @@
+{% extends 'master.html' %}
+{% block title %}Road Side Assistance{% endblock %}
+{% block pageTitle %}Road Side Assistance{% endblock %}
+{% block logout %}
+{% load static %}
+<a href="logout/"><img style="height:40px;width:40px" src="{% static 'assets/media/icons/logout.jpeg' %}"
+    alt="logout" /></a>
+{% endblock %}
+
+{% block content %}
+<div class="row gy-5 g-xl-10">
+  <!--begin::Col-->
+  <div class="col-xl-12 mb-5 mb-xl-5">
+    <!--begin::Table Widget 4-->
+    <div class="card card-flush h-xl-100">
+      <!--begin::Card header-->
+      <div class="card-header pt-7">
+        <!--begin::Heading-->
+        <div class="mb-13 text-center">
+          <!--begin::Title-->
+          <h1 class="mb-3">Road Side Assistance</h1>
+          <!--end::Title-->
+        </div>
+        <!--end::Heading-->
+      </div>
+      <!--end::Card header-->
+      <!--begin::Card body-->
+      <div class="card-body pt-2">
+        <!--begin:Form-->
+        <form id="kt_modal_new_target_form" class="form" action="accident/roadsideassistance/" method="post">
+          {% csrf_token %}
+          {% if success %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Your accident report has been submitted!
+            <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+          </div>
+          {% endif %}
+          <!-- user, order_id,feedback -->
+          <input type="hidden" name="user_id" id="user_id" value="{{user.id}}">
+          <!--begin::Input group-->
+          <div class="d-flex flex-column mb-8">
+            <label class="fs-6 fw-semibold mb-2">Please type your road side assistance request</label>
+            <textarea class="form-control form-control-solid" rows="10" name="road_side_assistance" id="road_side_assistance"
+              placeholder="Enter Your Road Side Assistance Request" required></textarea>
+          </div>
+          <!--end::Input group-->
+          <!--begin::Actions-->
+          <div class="text-center">
+            <button type="reset" id="kt_modal_new_target_cancel" class="btn btn-light me-3">Cancel</button>
+            <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+              <span class="indicator-label">Submit</span>
+              <span class="indicator-progress">Please wait...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+            </button>
+          </div>
+          <!--end::Actions-->
+        </form>
+        <!--end:Form-->
+      </div>
+
+    </div>
+    <!--end::Card body-->
+  </div>
+  <!--end::Table Widget 4-->
+</div>
+<!--end::Col-->
+</div>
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

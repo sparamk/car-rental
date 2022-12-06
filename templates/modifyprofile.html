@@ -66,7 +66,12 @@
 
           <input class="btn btn-primary" type="submit">
         </form>
-
+        <form class="row g-3 needs-validation" id="deleteaccount" action="deleteaccount/" method="POST">{% csrf_token %}
+          
+            <input type="hidden" class="form-control" id="deleteaccount" placeholder="Enter Delete" name="deleteaccount"
+              value="delete">
+                 <button class="btn btn-danger mt-5" type="submit" >Delete Account</button>
+        </form>
       </div>
     </div>
   </div>
