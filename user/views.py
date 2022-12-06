@@ -138,8 +138,6 @@ def login(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
-
-
 @login_required
 def modifyProfile(request):
     old_username = request.user
@@ -178,7 +176,6 @@ def modifyProfile(request):
             "last_name":user.last_name,
             "email":user.email,
             })
-
 
 def forgotPassword(request):
     if request.method == 'POST':
@@ -256,7 +253,14 @@ def changeProfilePassword(request):
         return render(request, 'change_profile_password.html')
 
 def deleteAccount(request):
-    pass
+    if request.method == 'POST':
+        old_username = User.objects.filter(username=request.user).first()
+        old_username.delete()
+        auth.logout(request)
+        messages.success(request, 'You account has been successfully deleted')
+        return render(request, 'authentication/login.html')
+    
+    return redirect(dashboard)
 
 def logout(request):
     auth.logout(request)
