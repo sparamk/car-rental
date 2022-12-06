@@ -1,0 +1,107 @@
+{% extends 'master.html' %}
+{% block title %}Edit Booking{% endblock %}
+{% block pageTitle %}Edit Booking{% endblock %}
+{% block logout %}
+{% load static %}
+<a href="logout/"><img style="height:40px;width:40px" src="{% static 'assets/media/icons/logout.jpeg' %}"
+    alt="logout" /></a>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="card card-flush h-xl-100">
+    <div class="card-body">
+      <div class="col-12">
+        <h2 class="bold text-dark m-5">
+          {{ success }}
+          {{ error }}
+        </h2>
+        <form class="row g-3 needs-validation" novalidate id="registration_form" action="booking/updatebooking/" method="POST"
+          data-parsley-validate="">{% csrf_token %}
+          <input type="hidden" name="id" value="{{ id }}">
+          <div class="form-floating mb-3 mt-3">
+            <input type="number" min="1" max="12" class="form-control" id="capacity" placeholder="Enter capacity"
+              name="capacity" required="" value="{{ capacity }}">
+            <label for="capacity">Capacity</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+
+          <div class="form-floating col-6 mb-3 mt-3">
+            <input type="date" class="form-control" id="from_date" placeholder="Enter From Date" name="from_date" required="" value="{{ from_date }}">
+            <label for="from_date">From Date</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <div class="form-floating col-6 mb-3 mt-3">
+            <input type="time" class="form-control" id="from_time" placeholder="Enter From Time" name="from_time"
+              data-parsley-trigger="change" required="" value="{{ from_time }}">
+            <label for="from_time">From Time</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+
+          <div class="form-floating col-6 mb-3 mt-3">
+            <input type="date" class="form-control" id="to_date" placeholder="Enter From Date" name="to_date" pattern="dd/mm/YY"
+              data-parsley-trigger="change" required="" value="{{ to_date }}">
+            <label for="to_date">To Date</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <div class="form-floating col-6 mb-3 mt-3">
+            <input type="time" class="form-control" id="to_time" name="to_time"
+              data-parsley-trigger="change" required="" value="{{ to_time }}" placeholder="{{ to_time }}">
+            <label for="to_time">To Time</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <select class="form-select " aria-label="Select example" name="subscription">
+            {% if subscription == '1' %}
+            <option value="silver" selected>Silver</option>
+            <option value="gold">Gold</option>
+            <option value="platinum">Platinum</option>
+            {% elif subscription == '2' %}
+            <option value="silver">Silver</option>
+            <option value="gold" selected>Gold</option>
+            <option value="platinum">Platinum</option>
+            {% elif subscription == '3' %}
+            <option value="silver">Silver</option>
+            <option value="gold">Gold</option>
+            <option value="platinum" selected>Platinum</option>
+            {% endif  %}
+        </select>
+          <input class="btn btn-primary" type="submit">
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

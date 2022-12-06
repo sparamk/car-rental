@@ -1,6 +1,6 @@
 {% extends 'master.html' %}
-{% block title %}Send Feedback Response{% endblock %}
-{% block pageTitle %}Send Feedback Response{% endblock %}
+{% block title %}View Road Side Assistance Reports{% endblock %}
+{% block pageTitle %}View Road Side Assistance Reports{% endblock %}
 {% block logout %}
 {% load static %}
 <a href="logout/"><img style="height:40px;width:40px" src="{% static 'assets/media/icons/logout.jpeg' %}"
@@ -29,23 +29,22 @@
         <table class="table table-hover table-dark">
           <thead>
             <tr class="fw-bold">
-              <th>Feedback Id</th>
-              <th>Feedback</th>
-              <th>Action</th>
+              <th>Road Side Assistance Id</th>
+              <th>Road Side Assistance Request</th>
+              <!-- <th>Action</th> -->
             </tr>
           </thead>
           <tbody>
-            {% for feedback in feedback %}
+            {% for assistance in assistance %}
             <tr>
-              <td>{{feedback.id}}</td>
-              <td>{{feedback.feedback_text}}</td>
-              <td>
-                <form action="employee/usfr/" method="post" class="d-flex align-items-center">
+              <td>{{assistance.id}}</td>
+              <td>{{assistance.road_side_assistance}}</td>
+              <!-- <td> -->
+                <!-- <form action="employee/usfr/" method="post" class="d-flex align-items-center">
                   {% csrf_token %}
                   <input type="hidden" name="id" value="{{feedback.id}}">
-                  <textarea name="feedback_text_response" id="feedback_text_response" cols="30" rows="5"></textarea>
                   <input class="btn btn-warning btn-sm m-1 text-dark" type="submit" value="Send Feedback Response">
-                </form>
+                </form> -->
                 <!-- <form action="/customer_portal/reschedule_booking/" method="post">
                   {% csrf_token %}
                   <input type="hidden" name="id" value="{{order.id}}">
@@ -62,7 +61,7 @@
                   <input type="hidden" name="id" value="{{order.id}}">
                   <input class="w3-btn w3-indigo" type="submit" value="Update">
                 </form> -->
-              </td>
+              <!-- </td> -->
             </tr>
             {% endfor %}
           </tbody>

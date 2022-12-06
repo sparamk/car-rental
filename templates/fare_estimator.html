@@ -1,0 +1,108 @@
+{% extends 'master.html' %}
+{% block logout %}
+{% load static %}
+<a href="logout/"><img style="height:40px;width:40px" src="{% static 'assets/media/icons/logout.jpeg' %}"
+		alt="logout" /></a>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="row gy-5 g-xl-10">
+	<!--begin::Col-->
+	<div class="col-xl-12 mb-5 mb-xl-5">
+		<!--begin::Table Widget 4-->
+		<div class="card card-flush h-xl-100">
+			<!--begin::Card header-->
+			<div class="card-header pt-7">
+
+			</div>
+			<!--end::Card header-->
+			<!--begin::Card body-->
+			<div class="card-body pt-2">
+				<!--begin:Form-->
+				<form id="kt_modal_new_target_form" class="form" action="#">
+					<!--begin::Heading-->
+					<div class="mb-13 text-center">
+						<!--begin::Title-->
+						<h1 class="mb-3">Fare Estimator</h1>
+						<!--end::Title-->
+					</div>
+					<!--end::Heading-->
+
+					<!--begin::Input group-->
+					<div class="row g-9 mb-8">
+						<!--begin::Col-->
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Select Car</label>
+							<select class="form-select form-select-solid" data-placeholder="Select a Car" name="car" onchange="update(this.value, this.getAttribute('data'))"
+								id="car" required>
+								<option value="">Select Vehicle...</option>
+								{% for vehicle in vehicles %}
+
+								<option value="{{vehicle.capacity}}" data="{{vehicle.subscription}}" name="{{vehicle.id}}">{{vehicle.car_name}}</option>
+
+
+								{% endfor %}
+
+							</select>
+						</div>
+						<!--end::Col-->
+						<!--begin::Col-->
+						<div class="col-md-6 fv-row">
+							<label class="fs-6 fw-semibold mb-2">Select Number of Days</label>
+							<input type="number" class="form-control form-control-solid" min="1" max="100" value="1"
+								name="days" id="days" required>
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Input group-->
+					<!--begin::Input group-->
+					<div class="row g-9 mb-8" id="fare_calculator">
+						<h2>Your fare is $ <span id="fare">0</span></h2>
+					</div>
+					<!--end::Input group-->
+					<!--begin::Actions-->
+					<div class="text-center">
+						<button type="reset" class="btn btn-light me-3" id="cancel">Cancel</button>
+						<button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
+							<span class="indicator-label">Submit</span>
+							<span class="indicator-progress">Please wait...
+								<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+						</button>
+					</div>
+					<!--end::Actions-->
+				</form>
+				<!--end:Form-->
+			</div>
+
+		</div>
+		<!--end::Card body-->
+	</div>
+	<!--end::Table Widget 4-->
+</div>
+<!--end::Col-->
+</div>
+
+<script>
+	
+	let days = document.getElementById('days');
+	let fare = document.getElementById('fare');
+	let cancel = document.getElementById('cancel');
+
+	let form = document.getElementById('kt_modal_new_target_form');
+	let rent = 0;
+
+	form.onsubmit = function (e) {
+		e.preventDefault();
+		let cars = document.getElementById('car');
+		
+		// console.log(cars.value)
+		fare.innerHTML = days.value * cars.value * 24;
+	};
+
+	cancel.onclick = function (e) {
+		e.preventDefault();
+		form.reset();
+		fare.innerHTML = 0;
+	};
+</script>
+{% endblock %}

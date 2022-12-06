@@ -1,6 +1,6 @@
 {% extends 'master.html' %} 
-{% block title %}Send Feedback{% endblock %} 
-{% block pageTitle %}Send Feedback{% endblock %} 
+{% block title %}Vehicle Theft Report{% endblock %} 
+{% block pageTitle %}Vehicle Theft Report{% endblock %} 
 {% block logout %}
 {% load static %}
 <a href="logout/"><img style="height:40px;width:40px"
@@ -17,7 +17,7 @@
                 <!--begin::Heading-->
                 <div class="mb-13 text-center">
                   <!--begin::Title-->
-                  <h1 class="mb-3">Feedback</h1>
+                  <h1 class="mb-3">Vehicle Theft Report</h1>
                   <!--end::Title-->
                 </div>
                 <!--end::Heading-->
@@ -26,11 +26,11 @@
             <!--begin::Card body-->
             <div class="card-body pt-2">
                 <!--begin:Form-->
-                <form id="kt_modal_new_target_form" class="form" action="/feedback/sendfeedback/" method="post">
+                <form id="kt_modal_new_target_form" class="form" action="accident/vehicletheftreport/" method="post">
                   {% csrf_token %}
                   {% if success %}
                   <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Your feedback has been submitted!
+                    Your report has been submitted!
                     <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
                   </div>
                   {% endif %}
@@ -38,9 +38,9 @@
                   <input type="hidden" name="user_id" id="user_id" value="{{user.id}}">
                   <!--begin::Input group-->
                   <div class="d-flex flex-column mb-8">
-                    <label class="fs-6 fw-semibold mb-2">Please type your feedback here</label>
-                    <textarea class="form-control form-control-solid" rows="5" name="feedback" id="feedback"
-                      placeholder="Enter Your Feedback" required></textarea>
+                    <label class="fs-6 fw-semibold mb-2">Please submit your vehicle theft report</label>
+                    <input class="form-control form-control-solid" rows="10" name="vehicle_theft_report" id="vehicle_theft_report"
+                      placeholder="Enter Your Feedback" required>
                   </div>
                   <!--end::Input group-->
                   <!--begin::Actions-->
@@ -56,26 +56,7 @@
                 </form>
                 <!--end:Form-->
               </div>
-              <div class="container text-center" style="height:300px;overflow:auto">
-                <table class="table table-hover table-dark">
-                  <thead>
-                    <tr class="fw-bold">
-                      <th>Feedback Id</th>
-                      <th>Feedback</th>
-                      <th>Feedback Response</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for feedback in feedback %}
-                    <tr>
-                      <td>{{feedback.id}}</td>
-                      <td>{{feedback.feedback_text}}</td>
-                      <td>{{feedback.feedback_text_response}}</td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
+        
             <!--end::Card body-->
         </div>
         <!--end::Table Widget 4-->

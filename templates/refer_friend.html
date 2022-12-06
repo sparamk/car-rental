@@ -1,0 +1,48 @@
+{% extends 'master.html' %}
+{% block logout %}
+{% load static %}
+<a href="logout/"><img style="height:40px;width:40px"
+    src="{% static 'assets/media/icons/logout.jpeg' %}" alt="logout" /></a>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="row gy-5 g-xl-10">
+  <!--begin::Col-->
+  <div class="col-xl-12 mb-5 mb-xl-5">
+    <!--begin::Table Widget 4-->
+    <div class="card card-flush h-xl-100">
+      <!--begin::Card header-->
+      <div class="card-header pt-7">
+        <!--begin::Title-->
+        <h2 class="card-title align-items-start flex-column">
+          <span class="card-label fw-bold text-gray-800">Enter the email address of your friend below :-</span>
+        </h2>
+        <!--end::Title-->
+      </div>
+      <!--end::Card header-->
+      <!--begin::Card body-->
+      <div class="card-body pt-2">
+        {% if success %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Email to your friend has been sent!
+            <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+          </div>
+          {% endif %}
+        <form class="container" action="/customer/referfriend/" method="post">
+          {% csrf_token %}
+          <br><br>
+          <!-- <label>If there are multiple friends please seperate them by a comma (,)</label>  -->
+          <input class="form-control" type="text" name="refer_friend"><br><br>
+          <input class="btn btn-primary" type="submit" value="Refer Friend">
+        </form>
+      </div>
+
+    </div>
+    <!--end::Card body-->
+  </div>
+  <!--end::Table Widget 4-->
+</div>
+<!--end::Col-->
+</div>
+
+{% endblock %}
