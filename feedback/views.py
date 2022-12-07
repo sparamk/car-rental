@@ -11,6 +11,7 @@ def sendFeedback(request):
         # feedback.feedback_response_text = ''
         feedback.save()
         success = 'feedback sent successfully'
-        return render(request, 'sendfeedback.html',{'success':success})
-
-    return render(request, 'sendfeedback.html')
+        feedback = Feedback.objects.filter(user=request.user)
+        return render(request, 'sendfeedback.html',{'success':success,'feedback':feedback})
+    feedback = Feedback.objects.filter(user=request.user)
+    return render(request, 'sendfeedback.html',{'feedback':feedback})
