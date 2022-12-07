@@ -1,0 +1,82 @@
+{% extends 'master.html' %}
+{% block title %}List Cars{% endblock %}
+{% block pageTitle %}List Cars{% endblock %}
+{% block logout %}
+{% load static %}
+<a href="logout/"><img style="height:40px;width:40px" src="{% static 'assets/media/icons/logout.jpeg' %}"
+    alt="logout" /></a>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="row gy-5 g-xl-10">
+  <!--begin::Col-->
+  <div class="col-xl-12 mb-5 mb-xl-5">
+    <!--begin::Table Widget 4-->
+    <div class="card card-flush h-xl-100">
+      <!--begin::Card header-->
+      <div class="card-header pt-7">
+        <!--begin::Title-->
+        <h2 class="card-title align-items-start flex-column">
+          {{ success }}
+          {{ error }}
+        </h2>
+        <!--end::Title-->
+      </div>
+      <!--end::Card header-->
+      <!--begin::Card body-->
+      <div class="card-body pt-2">
+        <table class="table table-hover table-dark">
+          <thead>
+            <tr class="fw-bold">
+              <th>Car</th>
+              <th>Color</th>
+              <th>Capacity</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for car in cars %}
+            <tr>
+              <td>{{car.car_name}}</td>
+              <td>${{car.color}}</td>
+              <td>{{car.capacity}} Seats</td>
+              <td>{{car.description}}</td>
+              <td>
+                <form action="/owner/editcar/" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{car.id}}">
+                  <input class="btn btn-warning btn-sm m-1 text-dark" type="submit" value="Edit Car">
+                </form>
+                <!-- <form action="/customer_portal/reschedule_booking/" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{order.id}}">
+                  <input class="btn btn-info btn-sm m-1" type="submit" value="Reschedule Booking">
+                </form> -->
+                <form action="/owner/deletecar/" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{car.id}}">
+                  <input class="btn btn-danger btn-sm m-1" type="submit" value="Delete Car">
+                </form>
+                <!--   
+                <form action = "/customer_portal/update/" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{order.id}}">
+                  <input class="w3-btn w3-indigo" type="submit" value="Update">
+                </form> -->
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!--end::Card body-->
+  </div>
+  <!--end::Table Widget 4-->
+</div>
+<!--end::Col-->
+</div>
+{% endblock %}

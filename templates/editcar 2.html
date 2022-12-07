@@ -1,0 +1,132 @@
+{% extends 'master.html' %}
+{% block title %}Edit Car{% endblock %}
+{% block pageTitle %}Edit Car{% endblock %}
+{% block logout %}
+{% load static %}
+<a href="logout/"><img style="height:40px;width:40px" src="{% static 'assets/media/icons/logout.jpeg' %}"
+    alt="logout" /></a>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="card card-flush h-xl-100">
+    <div class="card-body">
+      <div class="col-12">
+        <h2 class="bold text-dark m-5">
+          {{ success }}
+          {{ error }}
+        </h2>
+        <form class="row g-3 needs-validation" novalidate id="editcar" action="owner/updatecar/" method="POST"
+          data-parsley-validate="">{% csrf_token %}
+          <input type="hidden" class="form-control" id="car_id" name="car_id"
+              value="{{ car_id }}">
+          <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="car_name" placeholder="Enter Car Name" name="car_name"
+              required="" value="{{ car_name }}">
+            <label for="car_name">Car Name</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="color" placeholder="Enter color" name="color"
+              required="" value="{{ color }}">
+            <label for="color">Color</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="capacity" placeholder="Enter capacity" name="capacity"
+              required="" value="{{ capacity }}">
+            <label for="capacity">Capacity</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" id="description" placeholder="Enter description" name="description"
+              data-parsley-trigger="change" required="" value="{{ description }}" >
+            <label for="description">Description</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <div class="form-floating mb-3 mt-3">
+            <select class="form-select" aria-label="Select example" name="car_condition" value="{{ car_condition }}">
+              <option>Open this select menu</option>
+              <option value="0">Good</option>
+              <option value="1">Not Good</option>
+            </select>
+
+            <label for="car_condition">Car Condition</label>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              This field is required
+            </div>
+          </div>
+          <input class="btn btn-primary" type="submit">
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+    let mobile = document.getElementById('mobile')
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          phoneFormat(mobile);
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+
+
+  function phoneFormat(mobile) {
+    if (!input || isNaN(input)) return `input must be a number was sent ${input}`
+    if (typeof (input) !== 'string') input = input.toString()
+    if (input.length === 10) {
+      return input.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+    } else if (input.length < 10) {
+      return 'was not supplied enough numbers please pass a 10 digit number'
+      console.log('was not supplied enough numbers please pass a 10 digit number')
+    }
+    //return error was not supplied enough numbers please pass a 10 digit number
+    //if not check if length is greater than 10
+    //return was supplied too many numbers please pass a 10 digit number
+    //if not send something went wrong error for a catch all just in case
+  }
+</script>
+{% endblock %}
