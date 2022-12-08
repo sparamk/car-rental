@@ -8,5 +8,5 @@ urlpatterns = [
     path('deletebooking/', views.deleteBooking, name='deletebooking'),
     path('finalizecar/', views.finalizeCar, name='finalizecar'),
     path('finalizecarbooking/', views.finalizeCarBooking, name='finalizecarbooking'),
-    path('fareestimator', views.fareEstimator, name='fareestimator'),
+    path('fareestimator/', views.fareEstimator, name='fareestimator'),
 ]
