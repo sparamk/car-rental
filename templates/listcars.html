@@ -33,6 +33,7 @@
               <th>Color</th>
               <th>Capacity</th>
               <th>Description</th>
+              <th> Type </th>
               <th>Action</th>
             </tr>
           </thead>
@@ -43,7 +44,16 @@
               <td>{{car.color}}</td>
               <td>{{car.capacity}} Seats</td>
               <td>{{car.description}}</td>
-              <td>
+              <td> 
+                {% if car.subscription == '1' %}
+                  Silver
+                {% elif car.subscription == '2' %}
+                  Gold
+                {% else%}
+                  Platinum   
+                {% endif %}
+              </td>
+                    <td>
                 <form action="/owner/editcar/" method="post">
                   {% csrf_token %}
                   <input type="hidden" name="id" value="{{car.id}}">

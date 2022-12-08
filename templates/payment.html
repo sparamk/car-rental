@@ -1,0 +1,172 @@
+{% extends 'master.html' %}
+{% block title %}Payment{% endblock %}
+{% block pageTitle %}Payment{% endblock %}
+{% block logout %}
+{% load static %}
+<a href="logout/"><img style="height:40px;width:40px" src="{% static 'assets/media/icons/logout.jpeg' %}"
+    alt="logout" /></a>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="row gy-5 g-xl-10">
+  <!--begin::Col-->
+  <div class="col-xl-12 mb-5 mb-xl-5">
+    <!--begin::Table Widget 4-->
+    <div class="card card-flush h-xl-100">
+      <!--begin::Card header-->
+      <div class="card-header pt-7">
+        <!--begin::Title-->
+        <h2 class="card-title align-items-start flex-column">
+          <!-- {{ success }} -->
+          {{ error }}
+        </h2>
+        <!--end::Title-->
+      </div>
+      <!--end::Card header-->
+      <!--begin::Card body-->
+      <div class="card-body pt-2">
+        <table class="table table-hover table-dark">
+          <thead>
+            <tr class="fw-bold">
+              <th>From Date</th>
+              <th>To Date</th>
+              <th>Rent</th>
+              <th>Coupon</th>
+              <th>Payment Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if success %}
+            <div class="alert alert-success" role="alert">
+              <strong>{{ success }}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+              </button>
+            </div>
+            {% endif %}
+
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+              <strong>Message:</strong> {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+              </button>
+            </div>
+            {% endfor %}
+            {% for booking in bookings %}
+            <tr>
+              <td>{{booking.from_date}}</td>
+              <td>{{booking.to_date}}</td>
+              <td>$ {{booking.rent}}</td>
+              <td>
+                <form>
+                  {% csrf_token %}
+                  <input type="text" class="form-control" name="coupon" id="coupon">
+                  <button class="btn btn-primary btn-sm mt-2" id="applycoupon" type="submit">Apply Coupon</button>
+                </form>
+                <button class="btn btn-primary" id="apply" type="button" disabled hidden>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Loading...
+                </button>
+              </td>
+              <td>
+                <form>
+                  <!-- <form action="/car/checkcaravlb/" method="post"> -->
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{booking.id}}">
+                  <input type="hidden" name="from_date" value="{{booking.from_date }}">
+                  <input type="hidden" name="to_date" value="{{booking.to_date}}">
+                  <input type="hidden" id="rent" name="rent" value="{{booking.rent}}">
+                  <input type="hidden" name="capacity" value="{{booking.capacity}}">
+                  <input type="hidden" name="subscription" value="{{booking.subscription}}">
+                  <input type="hidden" name="discount" value="0" id="discount">
+                  <!-- <input type="text" name="discount" value="{{booking.subscription}}"> -->
+                </form>
+                <input class="btn btn-success btn-sm m-1" type="submit" value="Pay" id="submitBtn">
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!--end::Card body-->
+  </div>
+  <!--end::Table Widget 4-->
+</div>
+<!--end::Col-->
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  $(document).ready(function () {
+    $("#applycoupon").click(function (event) {
+      event.preventDefault();
+      $('#apply').show()
+      $('#applycoupon').hide()
+      $.ajax({
+        type: "POST",
+        url: "/transaction/applycoupon/",
+        data: {
+          data: document.getElementById('coupon').value,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function (response) {
+          $('#applycoupon').show()
+          $('#apply').hide()
+          if (response.exist == true) {
+            $('#coupon').addClass('is-valid')
+            $('#coupon').removeClass('is-invalid')
+            $('#coupon').val(response.coupons[0].coupon_code + ' | $' + response.coupons[0].discount)
+            $('#discount').val(response.coupons[0].discount)
+          } else {
+            $('#coupon').addClass('is-invalid')
+            $('#coupon').removeClass('is-valid')
+            $('#coupon').val()
+          }
+          console.log(response)
+        }
+      });
+      return false;
+    });
+  });
+  // -------------- stripe
+  console.log("Sanity check!");
+  // Get Stripe publishable key
+  // fetch("config/")
+  fetch("/transaction/config/")
+    .then((result) => {
+      return result.json();
+    })
+    .then((data) => {
+      // Initialize Stripe.js
+      const stripe = Stripe(data.publicKey);
+
+      // Event handler
+      document.querySelector("#submitBtn").addEventListener("click", (e) => {
+        e.preventDefault;
+        rent = document.getElementById('rent').value * 100;
+        discount = document.getElementById('discount').value * 100;
+        rent = rent - discount;
+
+        // Get Checkout Session ID
+        fetch("/transaction/create-checkout-session/?rent=" + rent)
+          .then((result) => {
+            return result.json();
+          })
+          .then((data) => {
+            console.log(data);
+
+            // Redirect to Stripe Checkout
+            return stripe.redirectToCheckout({ sessionId: data.sessionId });
+
+          })
+          .then((res) => {
+            console.log(res);
+          });
+      });
+    });
+
+</script>
+{% endblock %}

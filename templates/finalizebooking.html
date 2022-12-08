@@ -34,8 +34,7 @@
               <th>To Date</th>
               <th>Rent</th>
               <th>Confirmation</th>
-              <th>Is Paid</th>
-              <th>Action</th>
+              <th>Discount</th>
             </tr>
           </thead>
           <tbody>
@@ -53,7 +52,7 @@
               <td>{{booking.to_date}}</td>
               <td>$ {{booking.rent}}</td>
               <td>{{booking.confirmation}}</td>
-              <td>{{booking.is_paid}}</td>
+              
               <td>
                 <form action="/car/checkcaravlb/" method="post">
                   {% csrf_token %}
@@ -63,6 +62,7 @@
                   <input type="hidden" name="rent" value="{{booking.rent}}">
                   <input type="hidden" name="capacity" value="{{booking.capacity}}">
                   <input type="hidden" name="subscription" value="{{booking.subscription}}">
+                  <!-- <input type="text" name="discount" value="{{booking.subscription}}"> -->
                   <input class="btn btn-success btn-sm m-1" type="submit" value="Check Car Avlb">
                 </form>
                 <!--   

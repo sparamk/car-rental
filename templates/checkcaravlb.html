@@ -34,10 +34,13 @@
               <th>Capacity</th>
               <th>Description</th>
               <th>Rent</th>
+              <th>discount</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
+            <form action="/employee/finalizebooking/" method="post">
+              {% csrf_token %}
             {% for car in cars %}
             <tr>
               <td>{{car.car_name}}</td>
@@ -45,14 +48,15 @@
               <td>{{car.capacity}} Seats</td>
               <td>{{car.description}}</td>
               <td>$ {{car.rent}}</td>
+              <td><input type="text" class="form-control" name="discount" id="discount" placeholder="apply discount">
+              </td>
               <td>
-                <form action="/employee/finalizebooking/" method="post">
-                  {% csrf_token %}
                   <input type="hidden" name="id" value="{{car.id}}">
                   <input type="hidden" name="booking_id" value="{{car.booking_id}}">
-                  <input class="btn btn-warning btn-sm m-1 text-dark" type="submit" value="Finalise Booking">
-                </form>
+                  <input class="btn btn-warning btn-sm m-1 text-dark" type="submit" value="Assign Car">
               </td>
+            </form>
+
             </tr>
             {% endfor %}
           </tbody>

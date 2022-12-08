@@ -1,59 +1,32 @@
 {% load static %}
 <!--begin::Sidebar-->
-<div
-  id="kt_app_sidebar"
-  class="app-sidebar flex-column"
-  data-kt-drawer="true"
-  data-kt-drawer-name="app-sidebar"
-  data-kt-drawer-activate="{default: true, lg: false}"
-  data-kt-drawer-overlay="true"
-  data-kt-drawer-width="225px"
-  data-kt-drawer-direction="start"
-  data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle"
->
+<div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar"
+  data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
+  data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
   <!--begin::Logo-->
   <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
     <!--begin::Logo image-->
     <a href="/">
-      <img
-        alt="Logo"
-        src="{% static 'assets/media/logos/default-dark.svg' %}"
-        class="h-25px app-sidebar-logo-default"
-      />
-      <img
-        alt="Logo"
-        src="{% static 'assets/media/logos/default-small.svg' %}"
-        class="h-20px app-sidebar-logo-minimize"
-      />
+      <img alt="Logo" src="{% static 'assets/media/logos/default-dark.svg' %}"
+        class="h-25px app-sidebar-logo-default" />
+      <img alt="Logo" src="{% static 'assets/media/logos/default-small.svg' %}"
+        class="h-20px app-sidebar-logo-minimize" />
     </a>
     <!--end::Logo image-->
     <!--begin::Sidebar toggle-->
-    <div
-      id="kt_app_sidebar_toggle"
+    <div id="kt_app_sidebar_toggle"
       class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
-      data-kt-toggle="true"
-      data-kt-toggle-state="active"
-      data-kt-toggle-target="body"
-      data-kt-toggle-name="app-sidebar-minimize"
-    >
+      data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
+      data-kt-toggle-name="app-sidebar-minimize">
       <!--begin::Svg Icon | path: icons/duotune/arrows/arr079.svg-->
       <span class="svg-icon svg-icon-2 rotate-180">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            opacity="0.5"
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path opacity="0.5"
             d="M14.2657 11.4343L18.45 7.25C18.8642 6.83579 18.8642 6.16421 18.45 5.75C18.0358 5.33579 17.3642 5.33579 16.95 5.75L11.4071 11.2929C11.0166 11.6834 11.0166 12.3166 11.4071 12.7071L16.95 18.25C17.3642 18.6642 18.0358 18.6642 18.45 18.25C18.8642 17.8358 18.8642 17.1642 18.45 16.75L14.2657 12.5657C13.9533 12.2533 13.9533 11.7467 14.2657 11.4343Z"
-            fill="currentColor"
-          />
+            fill="currentColor" />
           <path
             d="M8.2657 11.4343L12.45 7.25C12.8642 6.83579 12.8642 6.16421 12.45 5.75C12.0358 5.33579 11.3642 5.33579 10.95 5.75L5.40712 11.2929C5.01659 11.6834 5.01659 12.3166 5.40712 12.7071L10.95 18.25C11.3642 18.6642 12.0358 18.6642 12.45 18.25C12.8642 17.8358 12.8642 17.1642 12.45 16.75L8.2657 12.5657C7.95328 12.2533 7.95328 11.7467 8.2657 11.4343Z"
-            fill="currentColor"
-          />
+            fill="currentColor" />
         </svg>
       </span>
       <!--end::Svg Icon-->
@@ -64,43 +37,28 @@
   <!--begin::sidebar menu-->
   <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
     <!--begin::Menu wrapper-->
-    <div
-      id="kt_app_sidebar_menu_wrapper"
-      class="app-sidebar-wrapper hover-scroll-overlay-y my-5"
-      data-kt-scroll="true"
-      data-kt-scroll-activate="true"
-      data-kt-scroll-height="auto"
+    <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5" data-kt-scroll="true"
+      data-kt-scroll-activate="true" data-kt-scroll-height="auto"
       data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
-      data-kt-scroll-wrappers="#kt_app_sidebar_menu"
-      data-kt-scroll-offset="5px"
-      data-kt-scroll-save-state="true"
-    >
+      data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
       <!--begin::Menu-->
-      <div
-        class="menu menu-column menu-rounded menu-sub-indention px-3"
-        id="#kt_app_sidebar_menu"
-        data-kt-menu="true"
-        data-kt-menu-expand="false"
-      >
+      <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu" data-kt-menu="true"
+        data-kt-menu-expand="false">
+        <!-- start owner -->
+        {% if request.session.owner == True %}
         <!--begin:Menu item-->
         <div class="menu-item pt-5">
           <!--begin:Menu content-->
           <div class="menu-content">
-            <span class="menu-heading fw-bold text-uppercase fs-7"
-              >owner</span
-            >
+            <span class="menu-heading fw-bold text-uppercase fs-7">owner</span>
           </div>
           <!--end:Menu content-->
         </div>
         <!--end:Menu item-->
-        
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="owner/addcoupon"
-          >
+          <a class="menu-link" href="owner/addcoupon">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -116,10 +74,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="owner/coupons"
-          >
+          <a class="menu-link" href="owner/coupons">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -135,10 +90,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="owner/addcar"
-          >
+          <a class="menu-link" href="owner/addcar">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -154,10 +106,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="manager/list_users/"
-          >
+          <a class="menu-link" href="manager/list_users/">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -173,10 +122,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="owner/listcars"
-          >
+          <a class="menu-link" href="owner/listcars">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -189,26 +135,59 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-        
+        <!-- end owner -->
+        {% endif %}
+
+        {% if request.session.customer == True %}
+        <!-- start customer -->
         <!--begin:Menu item-->
         <div class="menu-item pt-5">
           <!--begin:Menu content-->
           <div class="menu-content">
-            <span class="menu-heading fw-bold text-uppercase fs-7"
-              >customer</span
-            >
+            <span class="menu-heading fw-bold text-uppercase fs-7">customer</span>
           </div>
           <!--end:Menu content-->
         </div>
         <!--end:Menu item-->
-        
+      
+          <!--begin:Menu item-->
+          <div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link" href="sales/sellVehicle">
+              <span class="menu-icon">
+                <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
+                <span class="svg-icon svg-icon-2">
+                  <i class="fa fa-car"></i>
+                </span>
+                <!--end::Svg Icon-->
+              </span>
+              <span class="menu-title">Sell Car</span>
+            </a>
+            <!--end:Menu link-->
+          </div>
+          <!--end:Menu item-->
+      
+            <!--begin:Menu item-->
+        <div class="menu-item">
+          <!--begin:Menu link-->
+          <a class="menu-link" href="sales/buyVehicle">
+            <span class="menu-icon">
+              <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
+              <span class="svg-icon svg-icon-2">
+                <i class="fa fa-car"></i>
+              </span>
+              <!--end::Svg Icon-->
+            </span>
+            <span class="menu-title">Buy Car</span>
+          </a>
+          <!--end:Menu link-->
+        </div>
+        <!--end:Menu item-->
+      
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="appointment/appointment"
-          >
+          <a class="menu-link" href="appointment/appointment">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -221,65 +200,25 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-
-                <!--begin:Menu item-->
-                <div class="menu-item">
-                  <!--begin:Menu link-->
-                  <a
-                    class="menu-link"
-                    href="#"
-                  >
-                    <span class="menu-icon">
-                      <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
-                      <span class="svg-icon svg-icon-2">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <polygon points="0 0 24 0 24 24 0 24"/>
-                          <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#FFFFFF" fill-rule="nonzero" opacity="0.3"/>
-                          <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="currentColor" fill-rule="nonzero"/>
-                      </g>
-                        </svg>
-                      </span>
-                      <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Sales</span>
-                  </a>
-                  <!--end:Menu link-->
-                </div>
-                <!--end:Menu item-->
-        
-                <!--begin:Menu item-->
-                <div class="menu-item">
-                  <!--begin:Menu link-->
-                  <a
-                    class="menu-link {% if request.path == url %}active{% endif %}"
-                    href="feedback/sendfeedback"
-                  >
-                    <span class="menu-icon">
-                      <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
-                      <i class="fa fa-print"></i>
-                      <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Send Feedback</span>
-                  </a>
-                  <!--end:Menu link-->
-                </div>
-                <!--end:Menu item-->
-
+      
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link {% if request.path == url %}active{% endif %}"
-            href="customer/referfriend"
-          >
+          <a class="menu-link {% if request.path == url %}active{% endif %}" href="feedback/sendfeedback">
+            <span class="menu-icon">
+              <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
+              <i class="fa fa-print"></i>
+              <!--end::Svg Icon-->
+            </span>
+            <span class="menu-title">Send Feedback</span>
+          </a>
+          <!--end:Menu link-->
+        </div>
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        <div class="menu-item">
+          <!--begin:Menu link-->
+          <a class="menu-link {% if request.path == url %}active{% endif %}" href="customer/referfriend">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <i class="fa fa-user-group"></i>
@@ -290,15 +229,10 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link {% if request.path == url %}active{% endif %}"
-            href="customer/digitalcheckin"
-          >
+          <a class="menu-link {% if request.path == url %}active{% endif %}" href="customer/digitalcheckin">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <i class="fa fa-globe"></i>
@@ -309,33 +243,24 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="booking/bookings"
-          >
+          <a class="menu-link" href="booking/bookings">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <i class="fa fa-book"></i>
               <!--end::Svg Icon-->
             </span>
-            <span class="menu-title"> Manage Bookings</span>
+            <span class="menu-title">Retrieve Bookings</span>
           </a>
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="booking/fareestimator"
-          >
+          <a class="menu-link" href="booking/fareestimator">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <i class="fa fa-credit-card-alt"></i>
@@ -346,14 +271,10 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="booking/bookcar"
-          >
+          <a class="menu-link" href="booking/bookcar">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <i class="fa fa-car"></i>
@@ -364,15 +285,24 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-        
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="accident/reportaccident"
-          >
+          <a class="menu-link" href="transaction/payment">
+            <span class="menu-icon">
+              <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
+              <i class="fa fa-dollar"></i>
+              <!--end::Svg Icon-->
+            </span>
+            <span class="menu-title">Payment</span>
+          </a>
+          <!--end:Menu link-->
+        </div>
+        <!--end:Menu item-->
+        <!--begin:Menu item-->
+        <div class="menu-item">
+          <!--begin:Menu link-->
+          <a class="menu-link" href="accident/reportaccident">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -385,15 +315,10 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-        
-         <!--begin:Menu item-->
-         <div class="menu-item">
+        <!--begin:Menu item-->
+        <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="accident/roadsideassistance"
-          >
+          <a class="menu-link" href="accident/roadsideassistance">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -409,10 +334,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="accident/vehicletheftreport"
-          >
+          <a class="menu-link" href="accident/vehicletheftreport">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -425,27 +347,22 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-        
+        <!-- end customer -->
+        {% endif %}
+        <!-- begin user -->
         <!--begin:Menu item-->
         <div class="menu-item pt-5">
           <!--begin:Menu content-->
           <div class="menu-content">
-            <span class="menu-heading fw-bold text-uppercase fs-7"
-              >user</span
-            >
+            <span class="menu-heading fw-bold text-uppercase fs-7">user</span>
           </div>
           <!--end:Menu content-->
         </div>
         <!--end:Menu item-->
-
-        
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link {% if request.path == url %}active{% endif %}"
-            href="changeprofilepassword/"
-          >
+          <a class="menu-link {% if request.path == url %}active{% endif %}" href="changeprofilepassword/">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -458,52 +375,54 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link {% if request.path == url %}active{% endif %}"
-            href="/dashboard"
-          >
+          <a class="menu-link" href="/contactUs">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    opacity="0.3"
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path opacity="0.3"
                     d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z"
-                    fill="currentColor"
-                  />
+                    fill="currentColor" />
+                  <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z"
+                    fill="currentColor" />
                 </svg>
               </span>
               <!--end::Svg Icon-->
             </span>
-            <span class="menu-title">Dashboard</span>
+            <span class="menu-title">Contact Us</span>
           </a>
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-        
+              <!--begin:Menu item-->
+              <div class="menu-item">
+                <!--begin:Menu link-->
+                <a class="menu-link" href="/suggestRoadTrip">
+                  <span class="menu-icon">
+                    <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
+                    <span class="svg-icon svg-icon-2">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.3"
+                          d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
+                          fill="currentColor" />
+                        <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z"
+                          fill="currentColor" />
+                      </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                  </span>
+                  <span class="menu-title">Suggest Road Trip</span>
+                </a>
+                <!--end:Menu link-->
+              </div>
+              <!--end:Menu item-->
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="/modifyprofile"
-          >
+          <a class="menu-link" href="/modifyprofile">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -516,27 +435,21 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-        
+        {% if request.session.manager == True or request.session.owner == True %}
+        <!-- start manager -->
         <!--begin:Menu item-->
         <div class="menu-item pt-5">
           <!--begin:Menu content-->
           <div class="menu-content">
-            <span class="menu-heading fw-bold text-uppercase fs-7"
-              >manager</span
-            >
+            <span class="menu-heading fw-bold text-uppercase fs-7">manager</span>
           </div>
           <!--end:Menu content-->
         </div>
         <!--end:Menu item-->
-
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="manager/addemployee"
-          >
+          <a class="menu-link" href="manager/addemployee">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <i class="fa fa-user"></i>
@@ -547,33 +460,24 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-        
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="manager/editemployee"
-          >
+          <a class="menu-link" href="manager/editemployee">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <i class="fa fa-user-group"></i>
               <!--end::Svg Icon-->
             </span>
-            <span class="menu-title"> Edit Employee</span>
+            <span class="menu-title"> Edit Employee Details</span>
           </a>
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="booking/bookings"
-          >
+          <a class="menu-link" href="manager/bookings">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <i class="fa fa-book"></i>
@@ -584,49 +488,10 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-
-
-
-                <!--begin:Menu item-->
-                <div class="menu-item">
-                  <!--begin:Menu link-->
-                  <a
-                    class="menu-link"
-                    href="#"
-                  >
-                    <span class="menu-icon">
-                      <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
-                      <span class="svg-icon svg-icon-2">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <polygon points="0 0 24 0 24 24 0 24"/>
-                          <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#FFFFFF" fill-rule="nonzero" opacity="0.3"/>
-                          <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="currentColor" fill-rule="nonzero"/>
-                      </g>
-                        </svg>
-                      </span>
-                      <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Edit Car Availability</span>
-                  </a>
-                  <!--end:Menu link-->
-                </div>
-                <!--end:Menu item-->
-
-                
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="accident/viewaccidentreports"
-          >
+          <a class="menu-link" href="accident/viewaccidentreports">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -639,15 +504,10 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-        
-        
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="accident/viewroadsideassistance"
-          >
+          <a class="menu-link" href="accident/viewroadsideassistance">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -660,15 +520,10 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-        
-
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="accident/viewvehicletheftreport"
-          >
+          <a class="menu-link" href="accident/viewvehicletheftreport">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
@@ -681,46 +536,32 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-        
-
+        <!-- end manager -->
+        {% endif %}
+        {% if request.session.manager == True or request.session.owner == True or request.session.employee == True %}
+        <!-- begin employee -->
         <!--begin:Menu item-->
         <div class="menu-item pt-5">
           <!--begin:Menu content-->
           <div class="menu-content">
-            <span class="menu-heading fw-bold text-uppercase fs-7"
-              >Employee</span
-            >
+            <span class="menu-heading fw-bold text-uppercase fs-7">Employee</span>
           </div>
           <!--end:Menu content-->
         </div>
         <!--end:Menu item-->
-      
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link {% if request.path == url %}active{% endif %}"
-            href="employee/sfr"
-          >
+          <a class="menu-link {% if request.path == url %}active{% endif %}" href="employee/sfr">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <span class="svg-icon svg-icon-2">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    opacity="0.3"
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path opacity="0.3"
                     d="M11.8 5.2L17.7 8.6V15.4L11.8 18.8L5.90001 15.4V8.6L11.8 5.2ZM11.8 2C11.5 2 11.2 2.1 11 2.2L3.8 6.4C3.3 6.7 3 7.3 3 7.9V16.2C3 16.8 3.3 17.4 3.8 17.7L11 21.9C11.3 22 11.5 22.1 11.8 22.1C12.1 22.1 12.4 22 12.6 21.9L19.8 17.7C20.3 17.4 20.6 16.8 20.6 16.2V7.9C20.6 7.3 20.3 6.7 19.8 6.4L12.6 2.2C12.4 2.1 12.1 2 11.8 2Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z"
-                    fill="currentColor"
-                  />
+                    fill="currentColor" />
+                  <path d="M11.8 8.69995L8.90001 10.3V13.7L11.8 15.3L14.7 13.7V10.3L11.8 8.69995Z"
+                    fill="currentColor" />
                 </svg>
               </span>
               <!--end::Svg Icon-->
@@ -730,15 +571,10 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-        
-        
         <!--begin:Menu item-->
         <div class="menu-item">
           <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="booking/finalizecar"
-          >
+          <a class="menu-link" href="booking/finalizecar">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
               <i class="fa fa-bookmark"></i>
@@ -749,40 +585,8 @@
           <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-      
-        <!--begin:Menu item-->
-        <div class="menu-item">
-          <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="#"
-          >
-            <span class="menu-icon">
-              <!--begin::Svg Icon | path: icons/duotune/abstract/abs014.svg-->
-              <span class="svg-icon svg-icon-2">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <polygon points="0 0 24 0 24 24 0 24"/>
-                  <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#FFFFFF" fill-rule="nonzero" opacity="0.3"/>
-                  <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="currentColor" fill-rule="nonzero"/>
-              </g>
-                </svg>
-              </span>
-              <!--end::Svg Icon-->
-            </span>
-            <span class="menu-title">View Transaction</span>
-          </a>
-          <!--end:Menu link-->
-        </div>
-        <!--end:Menu item-->
-                
-        
+
+        {% endif %}
       </div>
       <!--end::Menu-->
     </div>

@@ -16,13 +16,17 @@
         <h2 class="bold text-dark m-5">
           {{ success }}
           {{ error }}
+          <!-- keywords owner, manager, customer, employee -->
+          {% if request.session.manager == True and request.session.customer == True %}
+          {% endif %}
         </h2>
         <form class="row g-3 needs-validation" novalidate id="registration_form" action="modifyprofile/" method="POST"
           data-parsley-validate="">{% csrf_token %}
+          <h4>Firstname</h4>
           <div class="form-floating mb-3 mt-3">
             <input type="text" class="form-control" id="firstname" placeholder="Enter Firstname" name="firstname"
               required="" value="{{ first_name }}">
-            <label for="firstname">First Name</label>
+            {% comment %} <label for="firstname">First Name</label> {% endcomment %}
             <div class="valid-feedback">
               Looks good!
             </div>
@@ -30,10 +34,12 @@
               This field is required
             </div>
           </div>
+          <h4>Lastname</h4>
+
           <div class="form-floating mb-3 mt-3">
             <input type="text" class="form-control" id="lastname" placeholder="Enter lastname" name="lastname"
               required="" value="{{ last_name }}">
-            <label for="lastname">Last Name</label>
+            {% comment %} <label for="lastname">Last Name</label> {% endcomment %}
             <div class="valid-feedback">
               Looks good!
             </div>
@@ -41,10 +47,12 @@
               This field is required
             </div>
           </div>
+          <h4>Username</h4>
+
           <div class="form-floating mb-3 mt-3">
             <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username"
               required="" value="{{ username }}">
-            <label for="username">Username</label>
+            {% comment %} <label for="username">Username</label> {% endcomment %}
             <div class="valid-feedback">
               Looks good!
             </div>
@@ -52,10 +60,11 @@
               This field is required
             </div>
           </div>
+          <h4> Email</h4>
           <div class="form-floating mb-3 mt-3">
             <input type="text" class="form-control" id="email" placeholder="Enter email" name="email"
               data-parsley-trigger="change" required="" value="{{ email }}" readonly>
-            <label for="email">Email</label>
+            {% comment %} <label for="email">Email</label> {% endcomment %}
             <div class="valid-feedback">
               Looks good!
             </div>
