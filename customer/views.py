@@ -25,17 +25,19 @@ from car.models import *
 # Create your views here.
 def digitalCheckin(request):
     if request.method == 'POST':
-        check_in_date = datetime.datetime.strptime(request.POST['check_in_date']+ ' ' + request.POST['check_in_time'], '%Y-%m-%d %H:%M')
+        check_in_date = '2024-04-05 03:15'
         checkin = Digital_Check_In()
         checkin.user = request.user
         checkin.book_id = request.POST['booking_id']
         checkin.check_in_date = check_in_date
-        checkin.save()
+        booking= Book_Car.objects.get(id=request.POST['booking_id'])
+        booking.confirmation=True
+        booking.save()
         messages.success(request, 'Digital checkin done successfully')
-        booking = Book.objects.filter(user=request.user)
+        booking = Book_Car.objects.all
         return render(request, 'digitalcheckin.html',{'booking':booking})
     else:
-        booking = Book.objects.filter(user=request.user)
+        booking = Book_Car.objects.all
         return render(request, 'digitalcheckin.html',{'booking':booking})
 
 
@@ -59,6 +61,3 @@ def referFriend(request):
         return render(request, 'refer_friend.html', {'success':success})
     else:
         return render(request, 'refer_friend.html')
-
-def myWallet(request):
-    pass
