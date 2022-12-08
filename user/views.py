@@ -72,6 +72,11 @@ def signUp(request):
         myuser.email = email
         myuser.is_active= False
         myuser.save()
+        doser = myuser
+        mygroup = Group.objects.get(name='customer')
+        mygroup.user_set.add(doser)
+        mygroup = Group.objects.get(name='ban')
+        mygroup.user_set.remove(doser)
         messages.success(request, "Your account has been created successfully!")
         # Welcome Email
         subject = "Welcome to Pushpak Travels"
