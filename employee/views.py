@@ -6,14 +6,15 @@ from car.models import *
 from customer.models import *
 from booking.models import *
 # Create your views here.
-def assignCar(request):
-    pass
 
 def addDiscount(request):
-    pass
+    return render(request, 'adddiscount.html')
 
-def deleteDiscount(request):
-    pass
+def deleteDiscount(disc,book):
+    booking = Book_Car.objects.filter(id=book).first()
+    booking.rent= booking.rent-float(disc)
+    booking.save()
+
 
 def sfr(request):
     feedback = Feedback.objects.all()
@@ -32,6 +33,7 @@ def finalizeBooking(request):
     if request.method == 'POST':
         car_id = request.POST['id']
         booking_id = request.POST['booking_id']
+        disc=request.POST['discount']
         car = Cars.objects.filter(id=car_id).first()
         booking = Book_Car.objects.filter(id=booking_id).first()
         book = Book()
@@ -41,9 +43,13 @@ def finalizeBooking(request):
         book.car_id = car_id
         book.user_id = booking.user_id
         book.confirmation = True
+        if(disc == ''):
+            disc =0
+        deleteDiscount(disc,booking_id)
         book.save()
         messages.success(request,"Your booking is success")
     return render(request, 'finalbooking.html')
 
+    
 def updateCarCondition(request):
     pass
