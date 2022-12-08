@@ -1,66 +1,84 @@
 from django.shortcuts import render
 from booking.views import *
+from car.models import *
+from booking.models import *
+from owner.models import *
+from django.http import JsonResponse
+import stripe
+from django.conf import settings
+from django.http.response import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.base import TemplateView
 # import stripe
 
 # Create your views here.
 def payment(request):
-    pass
+    bookings = Book.objects.all()
+    booked_cars = Book_Car.objects.all()
+    booking_list = []
+    for booking in bookings:
+        if (booking.confirmation == 1 and booking.is_paid == 0):
+            booked_car = Book_Car.objects.filter(id=booking.book_car_id)
+            # car = Cars.objects.filter(id=booking.book_car_id)
+            # booking_list_dictionary = {
+            #     'from_date':booking.from_date,
+            #     'to_date':booking.to_date,
+            #     'rent':booked_car.id,
+            #     # 'car_name':car.car_name,
+            #     }
+            # booking_list.append(booking_list_dictionary)
+    return render(request, 'payment.html',{'bookings':booked_car})
 
-def requestRefund(request):
-    pass
+
 
 def applyCoupon(request):
-    pass
+    if request.method == 'POST':
+        coupons = Coupons.objects.filter(coupon_code=request.POST['data'])
+        exist = Coupons.objects.filter(coupon_code=request.POST['data']).exists()
+        return JsonResponse({"coupons":list(coupons.values()),'exist':exist})
 
-def viewTransaction(request):
-    pass
 
     
 # below are the four methods being used frmo the stripe api into the transactions app
-# @csrf_exempt
+
+class SuccessView(TemplateView):
+    template_name = 'checkout/success.html'
+
+def success(request):
+    if request.method == 'GET':
+        success = request.GET['session_id']
+        return render(request, 'checkout/success.html',{'success':success})
+
+class CancelledView(TemplateView):
+    template_name = 'checkout/cancelled.html'
+
+
+@csrf_exempt
 def stripe_config(request):
     if request.method == 'GET':
         stripe_config = {'publicKey': settings.STRIPE_PUBLISHABLE_KEY}
         return JsonResponse(stripe_config, safe=False)
 
 
-# @csrf_exempt
+@csrf_exempt
 def create_checkout_session(request):
-    print("hello world") 
-    pass
     if request.method == 'GET':
+        rent = request.GET['rent']
         domain_url = 'http://localhost:8000/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         try:
-            # Create new Checkout Session for the order
-            # Other optional params include:
-            # [billing_address_collection] - to display billing address details on the page
-            # [customer] - if you have an existing Stripe Customer ID
-            # [payment_intent_data] - lets capture the payment later
-            # [customer_email] - lets you prefill the email input in the form
-            # For full details see https:#stripe.com/docs/api/checkout/sessions/create
-
-            # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-
-            # If we want to identify the user when using webhooks we can pass client_reference_id  to checkout
-            # session constructor. We will then be able to fetch it and make changes to our Django models.
-            #
-            # If we offer a SaaS service it would also be good to allow only authenticated users to purchase
-            # anything on our site.
-
             checkout_session = stripe.checkout.Session.create(
                 # client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=domain_url + '/success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + '/cancelled/',
+                success_url=domain_url + 'transaction/success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + 'transaction/cancelled/',
                 payment_method_types=['card'],
                 mode='payment',
                 line_items=[
                     {
-                        'name': 'Car',
+                        'name': 'Rent',
                         'quantity': 1,
                         'currency': 'usd',
-                        'amount': '2150',
-                        'booking_id': '16',
+                        'amount': rent,
                     }
                 ]
             )
@@ -69,7 +87,7 @@ def create_checkout_session(request):
             return JsonResponse({'error': str(e)})
 
 
-# @csrf_exempt
+@csrf_exempt
 def stripe_webhook(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
