@@ -25,7 +25,7 @@ def addCar(request):
 def editCar(request):
     if request.method == 'POST':
         car_id = request.POST['id']
-        car = Cars.objects.filter(id=car_id).first()
+        car = Cars.objects.get(id=car_id)
         return render(request, 'editcar.html',
                       {'car_id': car.id, 'car_name': car.car_name, 'color': car.color, 'description': car.description,
                        'car_condition': car.car_condition, 'capacity': car.capacity, 'subscription': car.subscription,})
@@ -40,8 +40,17 @@ def updateCar(request):
         capacity = request.POST['capacity']
         description = request.POST['description']
         car_condition = request.POST['car_condition']
-        car = Cars.objects.filter(id=car_id).update(car_name=car_name, color=color, capacity=capacity,
-                                                    description=description, car_condition=car_condition)
+        car_subcription = request.POST['subscription']
+        car = Cars.objects.get(id=car_id)
+        car.car_name=car_name
+        car.color=color
+        car.capacity=capacity  
+        car.description=description 
+        car.car_condition=car_condition
+        car.subscription=car_subcription
+        car.save()
+        
+        
         success = "The car has been updated successfully"
         car = Cars.objects.filter(id=car_id).first()
         return render(request, 'editcar.html',
