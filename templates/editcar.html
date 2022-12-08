@@ -80,19 +80,19 @@
             </div>
           </div>
           <div class="form-floating mb-3 mt-3">
-            <select class="form-select " aria-label="Select example" name="subscription">
+            <select class="form-select " aria-label="Select example" name="subscription" value = "{{subscription}}">
               {% if subscription == '1' %}
-              <option value="silver" selected>Silver</option>
-              <option value="gold">Gold</option>
-              <option value="platinum">Platinum</option>
+              <option value="1" selected>Silver</option>
+              <option value="2">Gold</option>
+              <option value="3">Platinum</option>
               {% elif subscription == '2' %}
-              <option value="silver">Silver</option>
-              <option value="gold" selected>Gold</option>
-              <option value="platinum">Platinum</option>
+              <option value="1">Silver</option>
+              <option value="2" selected>Gold</option>
+              <option value="3">Platinum</option>
               {% elif subscription == '3' %}
-              <option value="silver">Silver</option>
-              <option value="gold">Gold</option>
-              <option value="platinum" selected>Platinum</option>
+              <option value="1">Silver</option>
+              <option value="2">Gold</option>
+              <option value="3" selected>Platinum</option>
               {% endif %}
             </select>
           </div>
