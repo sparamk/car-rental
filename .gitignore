@@ -1,12 +1,2 @@
-# Ignore Mac system files
-.DS_store
-*.pyc 
 **/*.pyc
-**/migrations/*
-# Ignore node_modules folder
-node_modules
-**/__pycache__/
-/__pycache__/
 /static/
-/venv/
-**/migrations/

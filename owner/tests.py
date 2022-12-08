@@ -5,6 +5,8 @@ from django.test import TestCase, Client
 
 from owner.models import Cars, Coupons
 
+from django.contrib.auth.models import User, Group
+
 class owner_Car_TestCase(TestCase):
     def setUp(self):
         Cars.objects.create(car_name="audi", capacity="5",is_available="True",description="test_car",car_condition=True)
@@ -58,13 +60,17 @@ class Car_methods(unittest.TestCase):
 
     def test_AddCar(self):
         print(self._testMethodName)
+        newUser=User.objects.create_user("robot", "robot@gmail.com", "pass")
+        self.client.login(username="robot",password="pass")
         data = {
-            "car_name": "Maruti",
+            "car_name": "Marutii",
             "color": "White",
             "capacity": 5,
+            "cost_of_vehicle":50,
+            "rent_per_hour":20,
             "description": "Thevintage indian car",
-            "car_condition":1
-
+            "car_condition":1,
+            "subscription":3
         }
         response = self.client.post('/owner/addcar/', data=data)
         # Check that the response is 200 OK.
@@ -81,7 +87,8 @@ class Car_methods(unittest.TestCase):
             "color": "White",
             "capacity": 3,
             "description": "edit_car_change",
-            "car_condition":1
+            "car_condition":1,
+            "subscription":1
 
         }
         response = self.client.post('/owner/updatecar/',data=data)
