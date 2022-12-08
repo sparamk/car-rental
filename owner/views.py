@@ -49,13 +49,11 @@ def updateCar(request):
         car.car_condition=car_condition
         car.subscription=car_subcription
         car.save()
-        
-        
         success = "The car has been updated successfully"
         car = Cars.objects.filter(id=car_id).first()
         return render(request, 'editcar.html',
                       {'car_id': car.id, 'car_name': car.car_name, 'color': car.color, 'description': car.description,
-                       'capacity': car.capacity, 'success': success,'subscription': car.subscription,})
+                       'capacity': car.capacity, 'success': success,'subscription': car.subscription})
 
 
 def listCars(request):

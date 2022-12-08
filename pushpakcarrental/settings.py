@@ -55,11 +55,13 @@ INSTALLED_APPS = [
     'employee',
     'manager',
     'car',
-    'transaction',
+    # 'transaction',
     'salesanalysis',
     'owner',
     'appointment',
     'sales',
+    # Local
+    'transaction.apps.TransactionConfig', # new
 ]
 
 MIDDLEWARE = [
@@ -149,6 +151,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Stripe configuration
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51IQE6xDMwlpyC5iQUY4bLVpZXrx73lXSqQogsnQNRzapcJCAYToXy4mjIjXZxEQdlxTXUI7NL1ceGLEe6HLpJ18900n1DGywuA'
 STRIPE_SECRET_KEY = 'sk_test_51IQE6xDMwlpyC5iQHq8nj6HdCpGFAGJ1bwRPPe2rZpWfzLiQzfl7oXsmnTLLLbZQLYl0ahGCE1JS64HuJaeusJ1v00PpAUGubu'
-
+# sessionId: "cs_test_a1RMN2HtSNM1Qe2ELh102ZjlEvgjE0q4dNhgvCftkSUOHOpIHWmo426sPj"
 # This is only required when using webhooks
 STRIPE_ENDPOINT_SECRET = ''
